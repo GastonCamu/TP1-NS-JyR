@@ -3,6 +3,9 @@ package Productos.TipoProductos;
 import Productos.Producto;
 
 public class Bebida extends Producto{
+    private float gradoAlcohol;
+    private boolean importado;
+
     public Bebida(
             String identificador,
             String descripcion,

@@ -3,6 +3,8 @@ package Productos.TipoProductos;
 import Productos.Producto;
 
 public class ProductoEnvasado extends Producto {
+    private String tipoEnvase;
+    private boolean importado;
 
     public ProductoEnvasado(
             String identificador,

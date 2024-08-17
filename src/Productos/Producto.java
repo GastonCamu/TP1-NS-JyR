@@ -9,6 +9,10 @@ public class Producto {
     private float porcentajeGanancia;
     private boolean disponible;
 
+    public String getIdentificador() {
+        return identificador;
+    }
+
     public Producto(
             String identificador,
             String descripcion,
