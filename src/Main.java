@@ -1,5 +1,4 @@
-import Productos.Producto;
-import Productos.TipoProductos.ProductoEnvasado;
+import Tienda.Productos.TipoProductos.ProductoEnvasado;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.

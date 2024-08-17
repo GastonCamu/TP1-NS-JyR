@@ -1,4 +1,4 @@
-package Productos;
+package Tienda.Productos;
 
 public class Producto {
 
@@ -11,6 +11,12 @@ public class Producto {
 
     public String getIdentificador() {
         return identificador;
+    }
+    public float getPrecioUnitario() {
+        return precioUnitario;
+    }
+    public int getStock() {
+        return stock;
     }
 
     public Producto(
@@ -28,5 +34,13 @@ public class Producto {
         this.precioUnitario = precioUnitario;
         this.porcentajeGanancia = porcentajeGanancia;
         this.disponible = disponible;
+    }
+
+    public float aplicarDescuento(float porcentajeDescuento) {
+        float precioFinal = this.precioUnitario - (this.precioUnitario * porcentajeDescuento);
+        return precioFinal;
+    }
+    public void disponibleParaLaVenta() {
+        this.disponible = true;
     }
 }

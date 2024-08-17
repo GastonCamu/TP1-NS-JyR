@@ -1,6 +1,6 @@
-package Productos.TipoProductos;
+package Tienda.Productos.TipoProductos;
 
-import Productos.Producto;
+import Tienda.Productos.Producto;
 
 public class Bebida extends Producto{
     private float gradoAlcohol;

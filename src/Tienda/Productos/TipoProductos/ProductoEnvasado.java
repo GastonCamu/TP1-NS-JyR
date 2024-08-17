@@ -1,18 +1,20 @@
-package Productos.TipoProductos;
+package Tienda.Productos.TipoProductos;
 
-import Productos.Producto;
+import Tienda.Productos.Producto;
 
-public class ProductoLimpieza extends Producto {
-    private TipoAplicacionLimpieza tipoDeAplicacion;
+public class ProductoEnvasado extends Producto {
+    private String tipoEnvase;
+    private boolean importado;
 
-    public ProductoLimpieza(
+    public ProductoEnvasado(
             String identificador,
             String descripcion,
             int stock,
             float precioUnitario,
             float porcentajeGanancia,
             boolean disponible,
-            TipoAplicacionLimpieza tipoDeAplicacion)
+            String tipoEnvase,
+            boolean importado)
     {
         super(
                 identificador,
@@ -22,8 +24,6 @@ public class ProductoLimpieza extends Producto {
                 porcentajeGanancia,
                 disponible);
 
-        this.identificador = "AZ" + identificador;
-        this. tipoDeAplicacion = tipoDeAplicacion;
-
+        this.identificador = "AB" + identificador;
     }
 }

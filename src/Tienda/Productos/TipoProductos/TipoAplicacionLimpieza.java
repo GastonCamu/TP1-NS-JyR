@@ -1,4 +1,4 @@
-package Productos.TipoProductos;
+package Tienda.Productos.TipoProductos;
 
 public enum TipoAplicacionLimpieza {
     COCINA,
