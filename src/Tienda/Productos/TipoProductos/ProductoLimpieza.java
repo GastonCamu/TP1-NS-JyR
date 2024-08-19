@@ -9,8 +9,8 @@ public class ProductoLimpieza extends Producto {
             String identificador,
             String descripcion,
             int stock,
-            float precioUnitario,
-            float porcentajeGanancia,
+            double precioUnitario,
+            double porcentajeGanancia,
             boolean disponible,
             TipoAplicacionLimpieza tipoDeAplicacion)
     {

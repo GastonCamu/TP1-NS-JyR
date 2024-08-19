@@ -7,7 +7,7 @@ public class Tienda {
     private String nombre;
     private int cantMaximaStock;
     private int stockActual = 0;
-    private float saldoCaja;
+    private double saldoCaja;
     private List<Producto> productos = new ArrayList<>();
 
     public Tienda(String nombre, int cantMaximaStock, float saldoCaja) {
@@ -31,7 +31,7 @@ public class Tienda {
     }
 
     public void actualizarSaldoCaja(Producto producto) {
-        float importeTotalProducto = this.saldoCaja - (producto.getPrecioUnitario() * producto.getStock());
+        double importeTotalProducto = this.saldoCaja - (producto.getPrecioUnitario() * producto.getStock());
 
         if (importeTotalProducto > this.saldoCaja) {
             System.out.print("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja");

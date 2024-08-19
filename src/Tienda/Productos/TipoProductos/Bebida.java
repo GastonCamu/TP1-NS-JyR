@@ -10,8 +10,8 @@ public class Bebida extends Producto{
             String identificador,
             String descripcion,
             int stock,
-            float precioUnitario,
-            float porcentajeGanancia,
+            double precioUnitario,
+            double porcentajeGanancia,
             boolean disponible,
             float gradoAlcohol,
             boolean importado)
