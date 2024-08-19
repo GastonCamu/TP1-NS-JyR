@@ -1,6 +1,6 @@
 package Tienda.Productos;
 
-public class Producto {
+public abstract class Producto {
 
     protected String identificador;
     private String descripcion;

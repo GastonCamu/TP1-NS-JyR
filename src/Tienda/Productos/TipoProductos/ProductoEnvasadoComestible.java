@@ -1,23 +1,19 @@
 package Tienda.Productos.TipoProductos;
 
-import Tienda.Productos.Producto;
-
 import java.time.LocalDate;
 
-public class Bebida extends Producto{
-    private float gradoAlcohol;
-    private boolean importado;
+public class ProductoEnvasadoComestible extends ProductoEnvasado{
     private int calorias;
     private LocalDate fechaVencimiento;
 
-    public Bebida(
+    public ProductoEnvasadoComestible(
             String identificador,
             String descripcion,
             int stock,
             double precioUnitario,
             double porcentajeGanancia,
             boolean disponible,
-            float gradoAlcohol,
+            String tipoEnvase,
             boolean importado,
             int calorias,
             LocalDate fechaVencimiento)
@@ -28,8 +24,11 @@ public class Bebida extends Producto{
                 stock,
                 precioUnitario,
                 porcentajeGanancia,
-                disponible);
+                disponible,
+                tipoEnvase,
+                importado);
 
-        this.identificador = "AC" + identificador;
     }
+
 }
+
