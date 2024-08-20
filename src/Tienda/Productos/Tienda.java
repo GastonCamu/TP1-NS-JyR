@@ -23,21 +23,47 @@ public class Tienda {
             this.stockActual += producto.getStock();
             actualizarSaldoCaja(producto);
             producto.disponibleParaLaVenta();
-        }
-        else {
+        } else {
             System.out.print("No se pueden agregar nuevos productos a la tienda ya que se alcanzó el máximo de stock");
             System.out.print("Stock disponible: " + stockDisponible);
         }
     }
 
     public void actualizarSaldoCaja(Producto producto) {
-        double importeTotalProducto = this.saldoCaja - (producto.getPrecioUnitario() * producto.getStock());
+        double costoTotalProducto = producto.getPrecioUnitario() * producto.getStock();
 
-        if (importeTotalProducto > this.saldoCaja) {
+        if (costoTotalProducto > this.saldoCaja) {
             System.out.print("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja");
+        } else {
+            this.saldoCaja -= costoTotalProducto;
         }
-        else {
-            this.saldoCaja = importeTotalProducto;
+    }
+
+    public void VentaProductos(Producto producto, int cantidad) {
+        Producto[] listaVentaProductos = new Producto[36];
+        int cantidadVendida = 0;
+        if (validarExistenciaProducto(producto) && validarStockProducto(cantidad)) {
+            for (int i = 0; i < cantidad; i++) {
+                listaVentaProductos[cantidadVendida] = producto;
+                cantidadVendida++;
+            }
         }
+    }
+
+    public boolean validarStockProducto(int cantidad) {
+        for (Producto producto : productos) {
+            if (cantidad <= producto.getStock()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean validarExistenciaProducto(Producto productoAVender) {
+        for (Producto producto : productos) {
+            if (producto.getIdentificador().equals(productoAVender.getIdentificador())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
