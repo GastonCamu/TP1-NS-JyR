@@ -61,8 +61,7 @@ public abstract class Producto {
         System.out.println("Porcentaje ganancial: "+ getPorcentajeGanancia());
         if (this.disponible) {
             System.out.println("El producto esta disponible para la venta");
-        }
-        else {
+        } else {
             System.out.println("El producto no esta disponible para la venta");
         }
     }

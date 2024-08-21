@@ -6,46 +6,30 @@ import java.util.List;
 public class Venta {
     Producto[] listaVentaProductos = new Producto[36];
     List<String> identificadoresDiferentes = new ArrayList<>();
+    int cantidadVendida = 0;
+    float totalVenta;
 
+    public void VentaProductos(Producto producto, int cantidad) {
+        if (cantidad <= 12 && validarStockProducto(producto, cantidad)) {
 
-    public void VentaProductos(Producto producto, int cantidad, List<Producto> productos) {
-
-        int cantidadVendida = 0;
-        if (cantidad <= 12 && validarExistenciaProducto(producto, productos) && validarStockProducto(cantidad, productos)) {
-            if (identificadoresDiferentes.contains(producto.identificador)) {
-                System.out.print("Solo se pueden agregar 3 productos diferentes.");
-            }
-            else {
+            if (identificadoresDiferentes.size() < 3 && !identificadoresDiferentes.contains(producto.identificador)) {
                 identificadoresDiferentes.add(producto.identificador);
                 for (int i = 0; i < cantidad; i++) {
-                    listaVentaProductos[cantidadVendida] = producto;
-                    cantidadVendida++;
+                    if (cantidadVendida < listaVentaProductos.length) {
+                        listaVentaProductos[cantidadVendida] = producto;
+                        cantidadVendida++;
+                    } else {
+                        System.out.print("Se alcanzó el límite maximo de productos");
+                    }
                 }
+            } else {
+                System.out.print("Solo puede comprar hasta 3 productos diferentes");
             }
         }
     }
-    public validarStockYExistencia(int cantidadAComprar, List<Producto> productos) {
-       for (Producto producto : productos) {
-           if (validarStockProducto(cantidadAComprar,producto.getStock()) && validarExistenciaProducto(producto)) {
 
-           }
-       }
+    public boolean validarStockProducto(Producto producto, int cantidadAVender) {
+        return cantidadAVender <= producto.getStock();
     }
-    public boolean validarStockProducto(int cantidadAComprar, int stockProducto) {
-            if (cantidadAComprar <= stockProducto) {
-                return true;
-            }
-            else {
-            return false;
-        }
-    }
-    public boolean validarExistenciaProducto(Producto productoAVender) {
-            if (producto.getIdentificador().equals(productoAVender.getIdentificador())) {
-                return true;
-            }
-            else {
-                return false;
-        }
 
-    }
 }
