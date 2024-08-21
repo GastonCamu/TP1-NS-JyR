@@ -1,5 +1,7 @@
 package Tienda.Productos;
 
+import Tienda.Productos.TipoProductos.ProductoEnvasado;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,33 +39,5 @@ public class Tienda {
         } else {
             this.saldoCaja -= costoTotalProducto;
         }
-    }
-
-    public void VentaProductos(Producto producto, int cantidad) {
-        Producto[] listaVentaProductos = new Producto[36];
-        int cantidadVendida = 0;
-        if (validarExistenciaProducto(producto) && validarStockProducto(cantidad)) {
-            for (int i = 0; i < cantidad; i++) {
-                listaVentaProductos[cantidadVendida] = producto;
-                cantidadVendida++;
-            }
-        }
-    }
-
-    public boolean validarStockProducto(int cantidad) {
-        for (Producto producto : productos) {
-            if (cantidad <= producto.getStock()) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public boolean validarExistenciaProducto(Producto productoAVender) {
-        for (Producto producto : productos) {
-            if (producto.getIdentificador().equals(productoAVender.getIdentificador())) {
-                return true;
-            }
-        }
-        return false;
     }
 }
