@@ -4,6 +4,7 @@ import Tienda.Productos.TipoProductos.ProductoEnvasado;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Tienda {
     private String nombre;
@@ -39,5 +40,15 @@ public class Tienda {
         } else {
             this.saldoCaja -= costoTotalProducto;
         }
+    }
+    // Funcion en evaluacion, sirve para traer todos los productos con una suposicion del descuento que se les puede aplicar.
+    public String obtenerComestiblesConMenorDescuentoYNoImportados(float porcentajeDescuento) {
+        return productos.stream()
+                .filter(producto -> producto.isComestible() && !producto.isImportado())
+                .filter(producto -> !producto.isImportado())
+                .filter(producto -> producto.aplicarDescuento(porcentajeDescuento) < producto.getPrecioUnitario())
+                .sorted((p1, p2) -> Double.compare(p1.getPrecioUnitario(), p2.getPrecioUnitario()))
+                .map(producto -> producto.getDescripcion().toUpperCase())
+                .toList().toString();
     }
 }

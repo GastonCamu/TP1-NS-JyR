@@ -45,12 +45,20 @@ public abstract class Producto {
         this.disponible = disponible;
     }
 
+    public boolean isComestible() {
+        return false;
+    }
+
+    public boolean isImportado() {
+        return false;
+    }
+
     public double aplicarDescuento(float porcentajeDescuento) {
         double precioFinal = this.precioUnitario - (this.precioUnitario * (porcentajeDescuento / 100));
         return precioFinal;
     }
 
-    // lOS PRODUCTOS IMPORTADOS PUEDEN SER LOS ENVASADOS Y LAS BEBIDAS (puede ser tambien un override)
+    // (puede ser tambien un override)
     public double aplicarImpuesto(boolean importado) {
         if (importado) {
             double precioFinal = this.precioUnitario + (this.precioUnitario * (12f / 100));
@@ -58,6 +66,7 @@ public abstract class Producto {
         }
         return precioUnitario;
     }
+
     public void disponibleParaLaVenta() {
         this.disponible = true;
     }

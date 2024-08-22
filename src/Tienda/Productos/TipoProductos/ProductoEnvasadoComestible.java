@@ -30,6 +30,17 @@ public class ProductoEnvasadoComestible extends ProductoEnvasado{
 
         this.porcentajeGanancia = aplicarPorcentajeGanancia(porcentajeGanancia);
     }
+
+    @Override
+    public boolean isComestible() {
+        return super.isComestible();
+    }
+
+    @Override
+    public boolean isImportado() {
+        return importado;
+    }
+
     private float aplicarPorcentajeGanancia(float porcentajeGanancia) {
         if (porcentajeGanancia > 20) {
             System.out.print("Error: el porcentaje de ganancia excede del 20%");

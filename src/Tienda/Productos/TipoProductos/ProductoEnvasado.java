@@ -4,7 +4,7 @@ import Tienda.Productos.Producto;
 
 public class ProductoEnvasado extends Producto {
     private String tipoEnvase;
-    private boolean importado;
+    protected boolean importado;
 
     public ProductoEnvasado(
             String identificador,
@@ -25,7 +25,15 @@ public class ProductoEnvasado extends Producto {
                 disponible);
 
         this.identificador = "AB" + identificador;
+        this.tipoEnvase = tipoEnvase;
+        this.importado = importado;
     }
+
+    @Override
+    public boolean isImportado() {
+        return importado;
+    }
+
     @Override
     public double aplicarDescuento(float porcentajeDescuento) {
         if (porcentajeDescuento <= 15) {

@@ -31,7 +31,20 @@ public class Bebida extends Producto{
                 disponible);
 
         this.identificador = "AC" + identificador;
+        this.gradoAlcohol = gradoAlcohol;
+        this.importado = importado;
         this.calorias = calcularCalorias(calorias);
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    @Override
+    public boolean isComestible() {
+        return true;
+    }
+
+    @Override
+    public boolean isImportado() {
+        return importado;
     }
 
     private float calcularCalorias(float calorias) {
@@ -63,4 +76,5 @@ public class Bebida extends Producto{
         }
 
     }
+
 }

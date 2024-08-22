@@ -27,14 +27,6 @@ public class ProductoLimpieza extends Producto {
         this.porcentajeGanancia = aplicarPorcentajeGanancia(porcentajeGanancia);
 
     }
-//    private float pruebaAplicarPorcentaje(float porcentaje) {
-//        if ((this.tipoDeAplicacion.name() == "COCINA" || this.tipoDeAplicacion.name() == "MULTIUSO") && porcentaje > 25) {
-//            System.out.print("Error: el porcentaje de ganancia excede el permitido para este tipo de producto");
-//        } else if (porcentaje < 10 || porcentaje >25) {
-//            System.out.print("Error: el porcentaje de ganancia no es el adecuado para este tipo de producto");
-//        }
-//        return porcentaje;
-//    }
 
     private float aplicarPorcentajeGanancia(float porcentajeGanancia) {
         if (porcentajeGanancia > 25) {
