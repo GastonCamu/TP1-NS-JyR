@@ -1,10 +1,9 @@
-package Tienda.Productos;
+package Tienda;
 
-import Tienda.Productos.TipoProductos.ProductoEnvasado;
+import Tienda.Productos.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Tienda {
     private String nombre;

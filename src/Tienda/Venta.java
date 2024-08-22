@@ -1,4 +1,6 @@
-package Tienda.Productos;
+package Tienda;
+
+import Tienda.Productos.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ public class Venta {
         if (producto.getDisponible()) {
             int cantidadProductoDisponible = validarStockDisponible(producto, cantidad);
                 if (validar3ProductosDiferentes(producto)) {
-                    identificadoresDiferentes.add(producto.identificador);
+                    identificadoresDiferentes.add(producto.getIdentificador());
                     for (int i = 0; i < cantidad; i++) {
                         if (cantidadVendida < listaVentaProductos.length) {
                             listaVentaProductos[cantidadVendida] = producto;
@@ -28,7 +30,7 @@ public class Venta {
                 }
         }
         else {
-            System.out.print("El producto: " + producto.identificador + " " + producto.getDescripcion() + " no se encuentra disponible");
+            System.out.print("El producto: " + producto.getIdentificador() + " " + producto.getDescripcion() + " no se encuentra disponible");
         }
 
     }
@@ -43,7 +45,7 @@ public class Venta {
         }
     }
     public boolean validar3ProductosDiferentes(Producto producto) {
-        return identificadoresDiferentes.size() < 3 && !identificadoresDiferentes.contains(producto.identificador);
+        return identificadoresDiferentes.size() < 3 && !identificadoresDiferentes.contains(producto.getIdentificador());
     }
 
 }
