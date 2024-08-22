@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class Bebida extends Producto{
     private float gradoAlcohol;
     private boolean importado;
-    private int calorias;
+    private float calorias;
     private LocalDate fechaVencimiento;
 
     public Bebida(
@@ -15,11 +15,11 @@ public class Bebida extends Producto{
             String descripcion,
             int stock,
             double precioUnitario,
-            double porcentajeGanancia,
+            float porcentajeGanancia,
             boolean disponible,
             float gradoAlcohol,
             boolean importado,
-            int calorias,
+            float calorias,
             LocalDate fechaVencimiento)
     {
         super(
@@ -31,5 +31,36 @@ public class Bebida extends Producto{
                 disponible);
 
         this.identificador = "AC" + identificador;
+        this.calorias = calcularCalorias(calorias);
+    }
+
+    private float calcularCalorias(float calorias) {
+        if (this.gradoAlcohol >= 0 && this.gradoAlcohol <= 2) {
+            return calorias;
+        }
+        else if (this.gradoAlcohol > 2 && this.gradoAlcohol <= 4.5) {
+            return calorias * 1.25f;
+        }
+        else if (this.gradoAlcohol > 4.5) {
+            return  calorias * 1.5f;
+        }
+        else {
+            System.out.print("Error: El grado de alcohol no puede ser negativo");
+            return 0;
+        }
+    }
+
+    @Override
+    public double aplicarDescuento(float porcentajeDescuento) {
+        if (porcentajeDescuento <= 10) {
+            return super.aplicarDescuento(porcentajeDescuento);
+        }
+        else {
+            System.out.print("Error: el porcentaje de descuento no puede ser mayor al 10%");
+            System.out.print("Se establecera sin descuento");
+            return super.aplicarDescuento(0);
+
+        }
+
     }
 }

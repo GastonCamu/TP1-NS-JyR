@@ -6,7 +6,7 @@ public abstract class Producto {
     private String descripcion;
     private int stock;
     private double precioUnitario;
-    private double porcentajeGanancia;
+    protected float porcentajeGanancia;
     private boolean disponible;
 
     public String getIdentificador() {
@@ -33,7 +33,7 @@ public abstract class Producto {
             String descripcion,
             int stock,
             double precioUnitario,
-            double porcentajeGanancia,
+            float porcentajeGanancia,
             boolean disponible
             )
     {
@@ -46,8 +46,17 @@ public abstract class Producto {
     }
 
     public double aplicarDescuento(float porcentajeDescuento) {
-        double precioFinal = this.precioUnitario - (this.precioUnitario * porcentajeDescuento);
+        double precioFinal = this.precioUnitario - (this.precioUnitario * (porcentajeDescuento / 100));
         return precioFinal;
+    }
+
+    // lOS PRODUCTOS IMPORTADOS PUEDEN SER LOS ENVASADOS Y LAS BEBIDAS (puede ser tambien un override)
+    public double aplicarImpuesto(boolean importado) {
+        if (importado) {
+            double precioFinal = this.precioUnitario + (this.precioUnitario * (12f / 100));
+            return precioFinal;
+        }
+        return precioUnitario;
     }
     public void disponibleParaLaVenta() {
         this.disponible = true;

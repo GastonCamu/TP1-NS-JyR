@@ -11,7 +11,7 @@ public class ProductoEnvasadoComestible extends ProductoEnvasado{
             String descripcion,
             int stock,
             double precioUnitario,
-            double porcentajeGanancia,
+            float porcentajeGanancia,
             boolean disponible,
             String tipoEnvase,
             boolean importado,
@@ -28,7 +28,17 @@ public class ProductoEnvasadoComestible extends ProductoEnvasado{
                 tipoEnvase,
                 importado);
 
+        this.porcentajeGanancia = aplicarPorcentajeGanancia(porcentajeGanancia);
     }
-
+    private float aplicarPorcentajeGanancia(float porcentajeGanancia) {
+        if (porcentajeGanancia > 20) {
+            System.out.print("Error: el porcentaje de ganancia excede del 20%");
+            System.out.print("El porcentaje de ganancia se establecera en 20%");
+            return 20;
+        }
+        else {
+            return porcentajeGanancia;
+        }
+    }
 }
 
