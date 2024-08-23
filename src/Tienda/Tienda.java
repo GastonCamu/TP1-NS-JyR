@@ -12,22 +12,16 @@ public class Tienda {
     private float saldoCaja;
     private List<Producto> productos = new ArrayList<>();
 
-    public String getNombre() {
-        return nombre;
-    }
-
+    public String getNombre() { return nombre; }
     public int getCantMaximaStock() {
         return cantMaximaStock;
     }
-
     public int getStockActual() {
         return stockActual;
     }
-
     public float getSaldoCaja() {
         return saldoCaja;
     }
-
     public int getCantidadProductos() {
         return productos.size();
     }
@@ -60,6 +54,7 @@ public class Tienda {
             this.saldoCaja -= costoTotalProducto;
         }
     }
+
     // Funcion en evaluacion, sirve para traer todos los productos con una suposicion del descuento que se les puede aplicar.
     public String obtenerComestiblesConMenorDescuentoYNoImportados(float porcentajeDescuento) {
         return productos.stream()

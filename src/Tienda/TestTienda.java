@@ -34,14 +34,16 @@ public class TestTienda {
             return scanner.nextInt();
         }
         private void procesarMenuTienda(int opcion) {
+            Tienda tienda;
             switch (opcion) {
                 case 1:
-                    Tienda tienda = crearTienda();
+                    tienda = crearTienda();
                     tienda.mostrarDatosTienda();
                     tiendaCreada = true;
                     break;
                 case 2:
-//                    Tienda tienda = generarTienda();
+                    tienda = generarTienda();
+                    tienda.mostrarDatosTienda();
                     tiendaCreada = true;
                     break;
                 case 3:
@@ -96,12 +98,17 @@ public class TestTienda {
         scanner.nextLine(); // Limpia el buffer
         String nombre = scanner.nextLine();
 
-        System.out.println("Ingrese la cantidad maxima de stock");
-        int cantidadMaximaStock = scanner.nextInt();
+        int cantidadMaximaStock = obtenerValorIntPositivo("Ingrese la cantidad máxima de stock");
 
         // Se podria hacer un manejo de excepcion por si el usuario ingresa un . en vez de ,
-        System.out.println("Ingrese la cantidad de saldo en la caja");
-        float saldoCaja = scanner.nextFloat();
+        float saldoCaja = obtenerValorFloatPositivo("Ingrese el saldo de caja");
+
+        return new Tienda(nombre, cantidadMaximaStock, saldoCaja);
+    }
+    private Tienda generarTienda() {
+        String nombre = "KWIK-E-MART";
+        int cantidadMaximaStock = 1000;
+        float saldoCaja = 20000.99f;
 
         return new Tienda(nombre, cantidadMaximaStock, saldoCaja);
     }
@@ -158,5 +165,29 @@ public class TestTienda {
                 producto.getIdentificador(), producto.getDescripcion(), producto.getStock(),
                 producto.getPrecioUnitario(), producto.getPorcentajeGanancia(), producto.getDisponible(),
                 gradoAlcohol, importado, calorias, fechaVencimiento);
+    }
+
+    private int obtenerValorIntPositivo(String mensaje) {
+        int valor;
+        do {
+            System.out.println(mensaje);
+            valor = scanner.nextInt();
+            if (valor <= 0) {
+                System.out.println("El valor debe ser mayor a 0. Intente nuevamente");
+            }
+        } while (valor <= 0);
+        return valor;
+    }
+
+    private float obtenerValorFloatPositivo(String mensaje) {
+        float valor;
+        do {
+            System.out.println(mensaje);
+            valor = scanner.nextFloat();
+            if (valor <= 0) {
+                System.out.println("El valor debe ser mayor a 0. Intente nuevamente");
+            }
+        } while (valor <= 0);
+        return valor;
     }
 }
