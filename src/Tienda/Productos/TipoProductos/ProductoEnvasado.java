@@ -10,7 +10,7 @@ public class ProductoEnvasado extends Producto {
             String identificador,
             String descripcion,
             int stock,
-            double precioUnitario,
+            float precioUnitario,
             float porcentajeGanancia,
             boolean disponible,
             String tipoEnvase,

@@ -5,7 +5,7 @@ public class Producto {
     protected String identificador;
     private String descripcion;
     private int stock;
-    private double precioUnitario;
+    private float precioUnitario;
     protected float porcentajeGanancia;
     private boolean disponible;
 
@@ -18,10 +18,10 @@ public class Producto {
     public int getStock() {
         return this.stock;
     }
-    public double getPrecioUnitario() {
+    public float getPrecioUnitario() {
         return this.precioUnitario;
     }
-    public double getPorcentajeGanancia() {
+    public float getPorcentajeGanancia() {
         return this.porcentajeGanancia;
     }
     public boolean getDisponible() {
@@ -32,7 +32,7 @@ public class Producto {
             String identificador,
             String descripcion,
             int stock,
-            double precioUnitario,
+            float precioUnitario,
             float porcentajeGanancia,
             boolean disponible
             )

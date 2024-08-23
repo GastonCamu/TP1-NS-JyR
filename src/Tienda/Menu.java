@@ -1,6 +1,11 @@
 package Tienda;
 
 public abstract class Menu {
+    public static void mostrarMenuTienda() {
+        System.out.println("1: Crear tienda manualmente");
+        System.out.println("2: Generar tienda automaticamente");
+        System.out.println("3: Salir del programa");
+    }
     public static void mostrarMenuPrincipal() {
         System.out.println("Bienvenido a la KWIK-E-MART");
         System.out.println("Seleccione una de las siguientes opciones");

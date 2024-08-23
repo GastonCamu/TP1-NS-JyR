@@ -9,7 +9,7 @@ public class Tienda {
     private String nombre;
     private int cantMaximaStock;
     private int stockActual = 0;
-    private double saldoCaja;
+    private float saldoCaja;
     private List<Producto> productos = new ArrayList<>();
 
     public Tienda(String nombre, int cantMaximaStock, float saldoCaja) {
