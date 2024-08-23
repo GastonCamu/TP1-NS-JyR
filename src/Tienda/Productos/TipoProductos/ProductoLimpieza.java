@@ -29,9 +29,11 @@ public class ProductoLimpieza extends Producto {
     }
 
     private float aplicarPorcentajeGanancia(float porcentajeGanancia) {
+        StringBuilder sb = new StringBuilder();
         if (porcentajeGanancia > 25) {
-            System.out.print(("Error: El porcentaje de ganancia excede el maximo permitido (25%)"));
-            System.out.print(("Se establecera el porcentaje de ganancia en 0%"));
+            sb.append("Producto:").append(getIdentificador()).append("Error: el porcentaje de ganancia excede el maximo permitido (25%)");
+            System.out.println(sb.toString());
+            System.out.println(("Se establecera el porcentaje de ganancia en 0%"));
             return 0;
         }
         else if (porcentajeGanancia < 10) {
@@ -39,8 +41,9 @@ public class ProductoLimpieza extends Producto {
                 return porcentajeGanancia;
             }
             else {
-                System.out.print(("Error: El porcentaje de ganancia excede el minimo permitido (10%)"));
-                System.out.print(("Se establecera el porcentaje de ganancia en 0%"));
+                sb.append("Producto:").append(getIdentificador()).append(" Error: el porcentaje de ganacia excede el minimo permitido (10%)");
+                System.out.println(sb.toString());
+                System.out.println(("Se establecera el porcentaje de ganancia en 0%"));
                 return 0;
             }
         }
@@ -48,12 +51,14 @@ public class ProductoLimpieza extends Producto {
     }
     @Override
     public double aplicarDescuento(float porcentajeDescuento) {
+        StringBuilder sb = new StringBuilder();
         if (porcentajeDescuento <= 20) {
             return super.aplicarDescuento(porcentajeDescuento);
         }
         else {
-            System.out.print("Error: el porcentaje de descuento no puede ser mayor al 20%");
-            System.out.print("Se establecera sin descuento");
+            sb.append("Producto:").append(getIdentificador()).append(" Error: el porcentaje de descuento no puede ser mayor al 20%");
+            System.out.println(sb.toString());
+            System.out.println("Se establecera sin descuento");
             return super.aplicarDescuento(0);
 
         }

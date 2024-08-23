@@ -32,24 +32,32 @@ public class Tienda {
         this.saldoCaja = saldoCaja;
     }
 
-    public void AgregarProducto(Producto producto) {
-        int stockDisponible = this.cantMaximaStock - this.stockActual;
-        if (producto.getStock() <= stockDisponible) {
-            this.productos.add(producto);
-            this.stockActual += producto.getStock();
-            actualizarSaldoCaja(producto);
-            producto.disponibleParaLaVenta();
-        } else {
-            System.out.print("No se pueden agregar nuevos productos a la tienda ya que se alcanzó el máximo de stock");
-            System.out.print("Stock disponible: " + stockDisponible);
+    public void AgregarProducto(Producto... productos) {
+        StringBuilder sb = new StringBuilder();
+        for (Producto producto: productos) {
+            int stockDisponible = this.cantMaximaStock - this.stockActual;
+            if (producto.getStock() <= stockDisponible) {
+                this.productos.add(producto);
+                this.stockActual += producto.getStock();
+                actualizarSaldoCaja(producto);
+                producto.disponibleParaLaVenta();
+            } else {
+                sb.append("Producto:").append(producto.getIdentificador())
+                    .append(" Error: no se pudo agregar a la tienda ya que se alcanzó el máximo de stock");
+                System.out.println(sb.toString());
+                System.out.println("Stock disponible: " + stockDisponible);
+            }
         }
     }
 
     public void actualizarSaldoCaja(Producto producto) {
-        double costoTotalProducto = producto.getPrecioUnitario() * producto.getStock();
+        float costoTotalProducto = producto.getPrecioUnitario() * producto.getStock();
 
         if (costoTotalProducto > this.saldoCaja) {
-            System.out.print("El producto no podrá ser agregado a la tienda por saldo insuficiente en la caja");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Producto:").append(producto.getIdentificador())
+                .append(" Error: el producto no podrá ser agregado a la tienda por saldo insuficiente en la caja");
+            System.out.println(sb.toString());
         } else {
             this.saldoCaja -= costoTotalProducto;
         }
@@ -67,12 +75,14 @@ public class Tienda {
     }
 
     public void mostrarDatosTienda() {
-        System.out.println("-------------------------------------------");
-        System.out.println("Nombre: "+ getNombre());
-        System.out.println("Cantidad maxima de stock: "+ getCantMaximaStock());
-        System.out.println("Stock Actual: "+ getStockActual());
-        System.out.println("Saldo de la caja: "+ getSaldoCaja());
-        System.out.println("cantidad de productos en la tienda: "+ getCantidadProductos());
-        System.out.println("-------------------------------------------");
+        StringBuilder sb = new StringBuilder();
+        sb.append("-------------------------------------------\n")
+            .append("Nombre: ").append(getNombre()).append("\n")
+            .append("Cantidad maxima de stock: ").append(getCantMaximaStock()).append("\n")
+            .append("Stock Actual: ").append(getStockActual()).append("\n")
+            .append("Saldo de la caja: ").append(getSaldoCaja()).append("\n")
+            .append("Cantidad de productos en la tienda: ").append(getCantidadProductos()).append("\n")
+            .append("-------------------------------------------");
+        System.out.println(sb.toString());
     }
 }

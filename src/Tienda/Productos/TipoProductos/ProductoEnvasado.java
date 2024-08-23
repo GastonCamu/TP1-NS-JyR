@@ -3,7 +3,7 @@ package Tienda.Productos.TipoProductos;
 import Tienda.Productos.Producto;
 
 public class ProductoEnvasado extends Producto {
-    private String tipoEnvase;
+    private TipoEnvase tipoEnvase;
     protected boolean importado;
 
     public ProductoEnvasado(
@@ -13,7 +13,7 @@ public class ProductoEnvasado extends Producto {
             float precioUnitario,
             float porcentajeGanancia,
             boolean disponible,
-            String tipoEnvase,
+            TipoEnvase tipoEnvase,
             boolean importado)
     {
         super(
@@ -40,8 +40,10 @@ public class ProductoEnvasado extends Producto {
             return super.aplicarDescuento(porcentajeDescuento);
         }
         else {
-            System.out.print("Error: el porcentaje de descuento no puede ser mayor al 15%");
-            System.out.print("Se establecera sin descuento");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Producto:").append(getIdentificador()).append(" Error: el porcentaje de descuento no puede ser mayor al 15%");
+            System.out.println(sb.toString());
+            System.out.println("Se establecera sin descuento");
             return super.aplicarDescuento(0);
 
         }
