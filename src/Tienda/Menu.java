@@ -7,7 +7,6 @@ public abstract class Menu {
         System.out.println("3: Salir del programa");
     }
     public static void mostrarMenuPrincipal() {
-        System.out.println("Bienvenido a la KWIK-E-MART");
         System.out.println("Seleccione una de las siguientes opciones");
         System.out.println("1: Cargar o generar producto");
         System.out.println("2: Salir del programa");

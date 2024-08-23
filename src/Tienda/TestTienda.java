@@ -37,6 +37,7 @@ public class TestTienda {
             switch (opcion) {
                 case 1:
                     Tienda tienda = crearTienda();
+                    tienda.mostrarDatosTienda();
                     tiendaCreada = true;
                     break;
                 case 2:
@@ -92,11 +93,13 @@ public class TestTienda {
     }
     private Tienda crearTienda() {
         System.out.println("Ingrese el nombre de la tienda");
+        scanner.nextLine(); // Limpia el buffer
         String nombre = scanner.nextLine();
 
         System.out.println("Ingrese la cantidad maxima de stock");
         int cantidadMaximaStock = scanner.nextInt();
 
+        // Se podria hacer un manejo de excepcion por si el usuario ingresa un . en vez de ,
         System.out.println("Ingrese la cantidad de saldo en la caja");
         float saldoCaja = scanner.nextFloat();
 
