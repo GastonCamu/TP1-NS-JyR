@@ -4,15 +4,13 @@ import Tienda.Productos.Producto;
 import Tienda.Productos.TipoProductos.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.util.SimpleTimeZone;
 
 public class TestTienda {
     private Scanner scanner = new Scanner(System.in);
     private boolean salir = false;
     private boolean tiendaCreada = false;
+    Venta venta = new Venta();
     Tienda tienda;
 
 
@@ -58,6 +56,31 @@ public class TestTienda {
                     generarProductos();
                     break;
                 case 2:
+                    tienda.mostrarDatosProductos();
+                    break;
+                case 3:
+                    scanner.nextLine(); // Limpia el buffer
+                    System.out.println("Ingrese el identificador del producto:");
+                    tienda.mostrarDatosProducto(scanner.nextLine());
+                    break;
+                case 4:
+                    scanner.nextLine(); // Limpia el buffer
+                    System.out.println("Ingrese el identificador del producto a vender");
+                    Producto producto = tienda.obtenerProducto(scanner.nextLine());
+                    int cantidadAVender = scanner.nextInt();
+                    if (cantidadAVender <= 12 && cantidadAVender > 0) {
+                        venta.ventaProducto(producto, cantidadAVender);
+                    }
+                    else {
+                        System.out.println("Tiene que ingresar en un rango entre 1 y 12");
+                    }
+                    break;
+                case 5:
+                    venta.finalizarVenta();
+                    tienda.actualizarSaldoCajaPostVenta(venta.totalVenta);
+                    tienda.actualizarStockPostVenta(venta.listaIdentificadoresDiferentes, venta.listaCantidadProductos);
+                    tienda.verificarDisponibilidadProducto();
+                    venta = new Venta();
                     break;
                 case 6:
                     Menu.mensajeSalida();
@@ -65,6 +88,7 @@ public class TestTienda {
                     break;
                 default:
                     Menu.mensajeErrorOpcion();
+                    break;
             }
         }
 
@@ -88,18 +112,18 @@ public class TestTienda {
     }
 
     private void generarProductos () {
-        Bebida bebida1 = new Bebida("001", "coca-cola", 50, 1000.99f, 10, false, 0, false, 401, LocalDate.of(2024,10,20));
-        Bebida bebida2 = new Bebida("002", "agua", 100, 699.99f, 15, false, 0, false, 0, LocalDate.of(2024,9,5));
-        Bebida bebida3 = new Bebida("003", "vodka", 120, 1999.99f, 20, false, 13.5f, true, 200, LocalDate.of(2024,9,12));
+        Bebida bebida1 = new Bebida("001", "coca-cola", 10, 1000.99f, 10, 0, false, 401, LocalDate.of(2024,10,20));
+        Bebida bebida2 = new Bebida("002", "agua", 8, 699.99f, 15, 0, false, 0, LocalDate.of(2024,9,5));
+        Bebida bebida3 = new Bebida("003", "vodka", 120, 1999.99f, 20, 13.5f, true, 200, LocalDate.of(2024,9,12));
 
-        ProductoLimpieza productoLimpieza1 = new ProductoLimpieza("001", "escoba", 50, 1500.23f, 13, false, TipoAplicacionLimpieza.COCINA);
-        ProductoLimpieza productoLimpieza2 = new ProductoLimpieza("002", "suavizante", 70, 1800.23f, 25, false, TipoAplicacionLimpieza.ROPA);
-        ProductoLimpieza productoLimpieza3 = new ProductoLimpieza("003", "Detergente para baños", 20, 800.5f, 11, false, TipoAplicacionLimpieza.BANIO);
+        ProductoLimpieza productoLimpieza1 = new ProductoLimpieza("001", "escoba", 50, 1500.23f, 13, TipoAplicacionLimpieza.COCINA);
+        ProductoLimpieza productoLimpieza2 = new ProductoLimpieza("002", "suavizante", 70, 1800.23f, 25, TipoAplicacionLimpieza.ROPA);
+        ProductoLimpieza productoLimpieza3 = new ProductoLimpieza("003", "Detergente para baños", 20, 800.5f, 11, TipoAplicacionLimpieza.BANIO);
 
-        ProductoEnvasado productoEnvasado1 = new ProductoEnvasado("001", "Shampoo", 60, 900.3f, 13.5f, false, TipoEnvase.PLASTICO, false);
-        ProductoEnvasado productoEnvasado2 = new ProductoEnvasado("002", "Desodorante", 40, 852.6f, 14f, false, TipoEnvase.ALUMINIO, true);
-        ProductoEnvasadoComestible productoEnvasadoComestible1 = new ProductoEnvasadoComestible("003", "Lata de arvejas", 80, 999f, 15f, false, TipoEnvase.CARTON, false, 321, LocalDate.of(2024,11,23));
-        ProductoEnvasadoComestible productoEnvasadoComestible2 = new ProductoEnvasadoComestible("004", "Pure de tomate", 35, 360f, 8f, false, TipoEnvase.CARTON, false, 421, LocalDate.of(2024,11,26));
+        ProductoEnvasado productoEnvasado1 = new ProductoEnvasado("001", "Shampoo", 60, 900.3f, 13.5f, TipoEnvase.PLASTICO, false);
+        ProductoEnvasado productoEnvasado2 = new ProductoEnvasado("002", "Desodorante", 40, 852.6f, 14f, TipoEnvase.ALUMINIO, true);
+        ProductoEnvasadoComestible productoEnvasadoComestible1 = new ProductoEnvasadoComestible("003", "Lata de arvejas", 80, 999f, 15f, TipoEnvase.CARTON, false, 321, LocalDate.of(2024,11,23));
+        ProductoEnvasadoComestible productoEnvasadoComestible2 = new ProductoEnvasadoComestible("004", "Pure de tomate", 35, 360f, 8f, TipoEnvase.CARTON, false, 421, LocalDate.of(2024,11,26));
 
         tienda.AgregarProducto(bebida1, bebida2, bebida3,
                 productoLimpieza1, productoLimpieza2, productoLimpieza3,
@@ -130,6 +154,10 @@ public class TestTienda {
         } while (valor <= 0);
         return valor;
     }
+
+
+
+
 //    private Producto cargarDatosProducto() {
 //        System.out.println("Ingrese el identificador (solo numeros y 3 como maximo)");
 //        scanner.nextLine(); // Limpia el buffer

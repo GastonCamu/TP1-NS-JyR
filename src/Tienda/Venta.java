@@ -3,36 +3,70 @@ package Tienda;
 import Tienda.Productos.Producto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Venta {
-    Producto[] listaVentaProductos = new Producto[36];
-    List<String> identificadoresDiferentes = new ArrayList<>();
-    int cantidadVendida = 0;
+    List<Producto> listaProductosVenta = new ArrayList<>();
+    List<String> listaIdentificadoresDiferentes = new ArrayList<>();
+    List<Integer> listaCantidadProductos = new ArrayList<>();
     float totalVenta;
 
-    // validar que la cantidad ingresada sea menor a 12 desde el menu
-    public void VentaProductos(Producto producto, int cantidad) {
+    public void ventaProducto(Producto producto, int cantidad) {
+        StringBuilder sb = new StringBuilder();
         if (producto.getDisponible()) {
             int cantidadProductoDisponible = validarStockDisponible(producto, cantidad);
+            if(cantidad <= cantidadProductoDisponible) {
                 if (validar3ProductosDiferentes(producto)) {
-                    identificadoresDiferentes.add(producto.getIdentificador());
-                    for (int i = 0; i < cantidad; i++) {
-                        if (cantidadVendida < listaVentaProductos.length) {
-                            listaVentaProductos[cantidadVendida] = producto;
-                            cantidadVendida++;
-                        } else {
-                            System.out.print("Se alcanzó el límite maximo de productos");
-                        }
-                    }
+                    listaIdentificadoresDiferentes.add(producto.getIdentificador());
+                    listaProductosVenta.add(producto);
+                    listaCantidadProductos.add(cantidad);
+                    System.out.println("Se agrego correctamente el producto");
+
                 } else {
-                    System.out.print("Solo puede comprar hasta 3 productos diferentes");
+                    System.out.println("No puede ingresar el mismo producto ni excederse de 3 productos diferentes");
                 }
-        }
-        else {
-            System.out.print("El producto: " + producto.getIdentificador() + " " + producto.getDescripcion() + " no se encuentra disponible");
+            }
+            else {
+                System.out.println("No hay stock suficiente");
+            }
+
+        } else {
+            sb.append("Producto:").append(producto.getIdentificador())
+                    .append(" ").append(producto.getDescripcion())
+                    .append(" no se encuentra disponible");
+            System.out.println(sb.toString());
         }
 
+    }
+    public void finalizarVenta() {
+        for (int i = 0; i < listaCantidadProductos.size(); i++) {
+            System.out.println(listaIdentificadoresDiferentes.get(i)+ "-" +
+                    obtenerDescripcionProducto(listaIdentificadoresDiferentes.get(i)) + " "+ listaCantidadProductos.get(i)+ " X " + obtenerPrecioUnitario(listaIdentificadoresDiferentes.get(i)));
+        }
+        calcularTotalVenta();
+        System.out.println("Precio total: $"+ totalVenta);
+    }
+    public void calcularTotalVenta() {
+        for (int i = 0; i < listaCantidadProductos.size(); i++) {
+            totalVenta += listaCantidadProductos.get(i) *obtenerPrecioUnitario(listaIdentificadoresDiferentes.get(i));
+        }
+    }
+    public float obtenerPrecioUnitario(String identificador) {
+        for (Producto producto : listaProductosVenta) {
+            if (producto.getIdentificador().equalsIgnoreCase(identificador)) {
+                return producto.getPrecioUnitario();
+            }
+        }
+        return 0;
+    }
+    public String obtenerDescripcionProducto(String identificador) {
+        for (Producto producto : listaProductosVenta) {
+            if (producto.getIdentificador().equalsIgnoreCase(identificador)) {
+                return producto.getDescripcion();
+            }
+        }
+        return null;
     }
 
     public int validarStockDisponible(Producto producto, int cantidad) {
@@ -45,7 +79,7 @@ public class Venta {
         }
     }
     public boolean validar3ProductosDiferentes(Producto producto) {
-        return identificadoresDiferentes.size() < 3 && !identificadoresDiferentes.contains(producto.getIdentificador());
+        return !listaIdentificadoresDiferentes.contains(producto.getIdentificador()) && listaIdentificadoresDiferentes.size() < 3;
     }
 
 }

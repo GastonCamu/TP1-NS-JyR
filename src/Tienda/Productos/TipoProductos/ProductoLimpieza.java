@@ -11,7 +11,6 @@ public class ProductoLimpieza extends Producto {
             int stock,
             float precioUnitario,
             float porcentajeGanancia,
-            boolean disponible,
             TipoAplicacionLimpieza tipoDeAplicacion)
     {
         super(
@@ -19,10 +18,14 @@ public class ProductoLimpieza extends Producto {
                 descripcion,
                 stock,
                 precioUnitario,
-                porcentajeGanancia,
-                disponible);
+                porcentajeGanancia);
 
-        this.identificador = "AZ" + identificador;
+        if (identificador.length() == 3) {
+            this.identificador = "AZ" + identificador;
+        }
+        else {
+            System.out.print("El identificador solo admite 3 numeros");
+        }
         this. tipoDeAplicacion = tipoDeAplicacion;
         this.porcentajeGanancia = aplicarPorcentajeGanancia(porcentajeGanancia);
 

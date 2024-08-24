@@ -3,22 +3,29 @@ package Tienda;
 public abstract class Menu {
     public static void mostrarMenuTienda() {
         StringBuilder sb = new StringBuilder();
-        sb.append("1: Crear tienda manualmente\n")
+        sb.append("Seleccione una de las siguientes opciones:\n")
+            .append("1: Crear tienda manualmente\n")
             .append("2: Crear tienda de ejemplo (datos precargados)\n")
             .append("3: Salir del programa");
         System.out.println(sb.toString());
     }
     public static void mostrarMenuPrincipal() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Seleccione una de las siguientes opciones:\n")
-            .append("1: Generar Productos (datos precargados)\n")
-            .append("2: Realizar una venta\n")
+            sb.append("1: Generar Productos (datos precargados)\n")
+            .append("2: Mostrar todos los productos\n")
             .append("3: Mostrar producto por identificador\n")
-            .append("4: Mostrar todos los productos\n")
-            .append("5: Poner un producto disponible para la venta (identificador)\n")
+            .append("4: Agregar producto a la venta\n")
+            .append("5: Efectivizar venta\n")
             .append("6: Salir del programa");
         System.out.println(sb.toString());
     }
+//    public static void mostrarMenuVenta() {
+//        StringBuilder sb = new StringBuilder();
+//                sb.append("1: Cargar\n")
+//                .append("2: Mostrar todos los productos\n")
+//                .append("3: Salir del programa");
+//        System.out.println(sb.toString());
+//    }
 
 
     public static void mensajeSalida() {

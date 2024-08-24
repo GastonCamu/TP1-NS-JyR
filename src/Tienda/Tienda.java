@@ -26,31 +26,42 @@ public class Tienda {
         return productos.size();
     }
 
+
     public Tienda(String nombre, int cantMaximaStock, float saldoCaja) {
         this.nombre = nombre;
         this.cantMaximaStock = cantMaximaStock;
         this.saldoCaja = saldoCaja;
     }
 
-    public void AgregarProducto(Producto... productos) {
+    public void AgregarProducto(Producto... productosAIngresar) {
         StringBuilder sb = new StringBuilder();
-        for (Producto producto: productos) {
+        for (Producto productoAIngresar: productosAIngresar) {
             int stockDisponible = this.cantMaximaStock - this.stockActual;
-            if (producto.getStock() <= stockDisponible) {
-                this.productos.add(producto);
-                this.stockActual += producto.getStock();
-                actualizarSaldoCaja(producto);
-                producto.disponibleParaLaVenta();
-            } else {
-                sb.append("Producto:").append(producto.getIdentificador())
-                    .append(" Error: no se pudo agregar a la tienda ya que se alcanzó el máximo de stock");
-                System.out.println(sb.toString());
-                System.out.println("Stock disponible: " + stockDisponible);
-            }
+                if (productoAIngresar.getStock() <= stockDisponible ) {
+                    boolean productoExiste = false;
+
+                    for (Producto productoEnTienda : this.productos) {
+                        if (productoEnTienda.getIdentificador().equals(productoAIngresar.getIdentificador())) {
+                            sb.append("Producto:").append(productoAIngresar.getIdentificador())
+                                    .append(" Error: ya existe un producto con el mismo identificador\n");
+                            productoExiste = true;
+                        }
+                    }
+                    if (!productoExiste) {
+                        this.productos.add(productoAIngresar);
+                        this.stockActual += productoAIngresar.getStock();
+                        actualizarSaldoCajaPostCompra(productoAIngresar);
+                        productoAIngresar.disponibleParaLaVenta();
+                    }
+                } else {
+                    sb.append("Producto:").append(productoAIngresar.getIdentificador())
+                            .append(" Error: no se pudo agregar a la tienda ya que se alcanzó el máximo de stock\n");
+                }
         }
+        System.out.println(sb.toString());
     }
 
-    public void actualizarSaldoCaja(Producto producto) {
+    public void actualizarSaldoCajaPostCompra(Producto producto) {
         float costoTotalProducto = producto.getPrecioUnitario() * producto.getStock();
 
         if (costoTotalProducto > this.saldoCaja) {
@@ -62,18 +73,41 @@ public class Tienda {
             this.saldoCaja -= costoTotalProducto;
         }
     }
-
-    // Funcion en evaluacion, sirve para traer todos los productos con una suposicion del descuento que se les puede aplicar.
-    public String obtenerComestiblesConMenorDescuentoYNoImportados(float porcentajeDescuento) {
-        return productos.stream()
-                .filter(producto -> producto.isComestible() && !producto.isImportado())
-                .filter(producto -> !producto.isImportado())
-                .filter(producto -> producto.aplicarDescuento(porcentajeDescuento) < producto.getPrecioUnitario())
-                .sorted((p1, p2) -> Double.compare(p1.getPrecioUnitario(), p2.getPrecioUnitario()))
-                .map(producto -> producto.getDescripcion().toUpperCase())
-                .toList().toString();
+    public void actualizarSaldoCajaPostVenta(float totalVenta) {
+        this.saldoCaja += totalVenta;
+    }
+    public void actualizarStockPostVenta(List<String>identificadoresProductos, List<Integer> cantidadProductos) {
+        for (int i = 0; i < cantidadProductos.size(); i++) {
+            for (Producto producto : productos) {
+                if (producto.getIdentificador().equalsIgnoreCase(identificadoresProductos.get(i))) {
+                    producto.setStock(producto.getStock() - cantidadProductos.get(i));
+                }
+            }
+            this.stockActual -= cantidadProductos.get(i);
+        }
+    }
+    public void verificarDisponibilidadProducto() {
+        for (Producto producto : productos) {
+            if (producto.getStock() == 0) {
+                producto.noDisponibleParaLaVenta();
+            }
+        }
     }
 
+//    public List<String> obtenerComestiblesConMenorDescuento(float porcentajeDescuento) {
+//        return productos.stream()
+//                .filter(producto -> producto.isComestible() && !producto.isImportado())
+//                .filter(producto -> producto.getDescuento() < porcentajeDescuento)
+//                .sorted((p1, p2) -> Float.compare(p1.getPrecioUnitario(), p2.getPrecioUnitario()))
+//                .map(producto -> producto.getDescripcion().toUpperCase())
+//                .collect(Collectors.toList());
+//    }
+
+    public void mostrarDatosProductos() {
+        for (Producto producto : productos) {
+            producto.mostrarDatosProducto();
+        }
+    }
     public void mostrarDatosTienda() {
         StringBuilder sb = new StringBuilder();
         sb.append("-------------------------------------------\n")
@@ -84,5 +118,21 @@ public class Tienda {
             .append("Cantidad de productos en la tienda: ").append(getCantidadProductos()).append("\n")
             .append("-------------------------------------------");
         System.out.println(sb.toString());
+    }
+
+    public Producto obtenerProducto(String identificador) {
+        boolean productoEncontrado = false;
+        for (Producto producto : this.productos) {
+            if (producto.getIdentificador().equalsIgnoreCase(identificador)) {
+                productoEncontrado = true;
+                return producto;
+            }
+        }
+        System.out.println("No se encontro ningun producto con ese identificador");
+        return null;
+    }
+    public void mostrarDatosProducto(String identificador) {
+        Producto producto = obtenerProducto(identificador);
+        producto.mostrarDatosProducto();
     }
 }

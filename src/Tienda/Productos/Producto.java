@@ -7,7 +7,7 @@ public class Producto {
     private int stock;
     private float precioUnitario;
     protected float porcentajeGanancia;
-    private boolean disponible;
+    private boolean disponible = false;
 
     public String getIdentificador() {
         return this.identificador;
@@ -28,13 +28,14 @@ public class Producto {
         return this.disponible;
     }
 
+    public void setStock(int stock) { this.stock = stock; }
+
     public Producto(
             String identificador,
             String descripcion,
             int stock,
             float precioUnitario,
-            float porcentajeGanancia,
-            boolean disponible
+            float porcentajeGanancia
             )
     {
         this.identificador = identificador;
@@ -42,7 +43,6 @@ public class Producto {
         this.stock = stock;
         this.precioUnitario = precioUnitario;
         this.porcentajeGanancia = porcentajeGanancia;
-        this.disponible = disponible;
     }
 
     public boolean isComestible() {
@@ -70,17 +70,22 @@ public class Producto {
     public void disponibleParaLaVenta() {
         this.disponible = true;
     }
+    public void noDisponibleParaLaVenta() {this.disponible = false;}
 
     public void mostrarDatosProducto() {
-        System.out.println("Identificador: "+ getIdentificador());
-        System.out.println("Descripcion: "+ getDescripcion());
-        System.out.println("Stock: "+ getStock());
-        System.out.println("Precio Unitario: "+ getPrecioUnitario());
-        System.out.println("Porcentaje ganancial: "+ getPorcentajeGanancia());
-        if (this.disponible) {
-            System.out.println("El producto esta disponible para la venta");
+        StringBuilder sb = new StringBuilder();
+            sb.append("-------------------------------------------\n")
+            .append("Identificador: ").append(getIdentificador()).append("\n")
+            .append("Descripcion: ").append(getDescripcion()).append("\n")
+            .append("Stock: ").append(getStock()).append("\n")
+            .append("Precio unitario: ").append(getPrecioUnitario()).append("\n")
+            .append("Porcentaje ganancial: ").append(getPorcentajeGanancia()).append("\n");
+        if (getDisponible()) {
+            sb.append("Disponible para la venta\n");
         } else {
-            System.out.println("El producto no esta disponible para la venta");
+            sb.append("No esta disponible para la venta\n");
         }
+            sb.append("-------------------------------------------");
+        System.out.println(sb.toString());
     }
 }

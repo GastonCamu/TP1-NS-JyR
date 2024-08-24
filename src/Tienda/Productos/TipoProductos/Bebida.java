@@ -16,7 +16,6 @@ public class Bebida extends Producto{
             int stock,
             float precioUnitario,
             float porcentajeGanancia,
-            boolean disponible,
             float gradoAlcohol,
             boolean importado,
             float calorias,
@@ -27,10 +26,14 @@ public class Bebida extends Producto{
                 descripcion,
                 stock,
                 precioUnitario,
-                porcentajeGanancia,
-                disponible);
+                porcentajeGanancia);
 
-        this.identificador = "AC" + identificador;
+        if (identificador.length() == 3) {
+            this.identificador = "AC" + identificador;
+        }
+        else {
+            System.out.print("El identificador solo admite 3 numeros");
+        }
         this.gradoAlcohol = gradoAlcohol;
         this.importado = importado;
         this.calorias = calcularCalorias(calorias);

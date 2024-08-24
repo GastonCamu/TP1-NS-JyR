@@ -12,7 +12,6 @@ public class ProductoEnvasadoComestible extends ProductoEnvasado{
             int stock,
             float precioUnitario,
             float porcentajeGanancia,
-            boolean disponible,
             TipoEnvase tipoEnvase,
             boolean importado,
             int calorias,
@@ -24,7 +23,6 @@ public class ProductoEnvasadoComestible extends ProductoEnvasado{
                 stock,
                 precioUnitario,
                 porcentajeGanancia,
-                disponible,
                 tipoEnvase,
                 importado);
 

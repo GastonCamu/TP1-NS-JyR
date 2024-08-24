@@ -12,7 +12,6 @@ public class ProductoEnvasado extends Producto {
             int stock,
             float precioUnitario,
             float porcentajeGanancia,
-            boolean disponible,
             TipoEnvase tipoEnvase,
             boolean importado)
     {
@@ -21,10 +20,14 @@ public class ProductoEnvasado extends Producto {
                 descripcion,
                 stock,
                 precioUnitario,
-                porcentajeGanancia,
-                disponible);
+                porcentajeGanancia);
 
-        this.identificador = "AB" + identificador;
+        if (identificador.length() == 3) {
+            this.identificador = "AB" + identificador;
+        }
+        else {
+            System.out.print("El identificador solo admite 3 numeros");
+        }
         this.tipoEnvase = tipoEnvase;
         this.importado = importado;
     }
