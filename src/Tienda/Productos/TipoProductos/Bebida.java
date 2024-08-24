@@ -32,7 +32,7 @@ public class Bebida extends Producto{
             this.identificador = "AC" + identificador;
         }
         else {
-            System.out.print("El identificador solo admite 3 numeros");
+            System.out.println("El identificador solo admite 3 numeros");
         }
         this.gradoAlcohol = gradoAlcohol;
         this.importado = importado;

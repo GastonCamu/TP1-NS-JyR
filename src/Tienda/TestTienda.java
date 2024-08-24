@@ -67,6 +67,7 @@ public class TestTienda {
                     scanner.nextLine(); // Limpia el buffer
                     System.out.println("Ingrese el identificador del producto a vender");
                     Producto producto = tienda.obtenerProducto(scanner.nextLine());
+                    System.out.println("Ingrese la cantidad a vender");
                     int cantidadAVender = scanner.nextInt();
                     if (cantidadAVender <= 12 && cantidadAVender > 0) {
                         venta.ventaProducto(producto, cantidadAVender);

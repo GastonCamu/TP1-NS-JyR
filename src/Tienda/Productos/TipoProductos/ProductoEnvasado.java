@@ -26,7 +26,7 @@ public class ProductoEnvasado extends Producto {
             this.identificador = "AB" + identificador;
         }
         else {
-            System.out.print("El identificador solo admite 3 numeros");
+            System.out.println("El identificador solo admite 3 numeros");
         }
         this.tipoEnvase = tipoEnvase;
         this.importado = importado;

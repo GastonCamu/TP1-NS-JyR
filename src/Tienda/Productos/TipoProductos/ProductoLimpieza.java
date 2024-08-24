@@ -24,7 +24,7 @@ public class ProductoLimpieza extends Producto {
             this.identificador = "AZ" + identificador;
         }
         else {
-            System.out.print("El identificador solo admite 3 numeros");
+            System.out.println("El identificador solo admite 3 numeros");
         }
         this. tipoDeAplicacion = tipoDeAplicacion;
         this.porcentajeGanancia = aplicarPorcentajeGanancia(porcentajeGanancia);

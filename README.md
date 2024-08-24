@@ -12,6 +12,17 @@ La opción 4 permite agregar un nuevo producto a la venta
 La opción 5 efectiviza la venta
 La opción 6 cierra el sistema
 
+Ejemplo de uso:
+Presione la opcion 2: crear tienda de ejemplo.
+Presione la opcion 1: Generar productos.
+Presione la opcion 4: probar con ac001.
+Ingrese cantidad: 10
+Presione la opcion 4: probar con ac002.
+Ingrese cantidad: 8
+Presione 5: para finalizar la venta.
+Presione la opcion 2 para mostrar todos los productos y puede ver que estan esos dos como no disponibles para las ventas
+
+Asi con todos los productos tienen sus validaciones correspondientes.
 
 Consideraciones:
 1) Consideré que todos los productos vendidos tienen un descuento. No los asigné como atributos de los productos en sí sino que se calculan en la venta (falta ultimar detalles).
